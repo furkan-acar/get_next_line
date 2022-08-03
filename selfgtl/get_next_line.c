@@ -36,5 +36,6 @@ char    *get_next_line(int fd)
 	if (!left_str)
 		return (0);
 	line = ft_get_line(left_str);
+	left_str = 
 
 }

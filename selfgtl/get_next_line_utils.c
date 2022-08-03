@@ -2,17 +2,42 @@
 
 size_t	ft_strlen(char *s)
 {
+	size_t i;
 
+	i = 0;
+	if (!s)
+	{
+		return (0);
+	}
+	while(s[i])
+	{
+		i++;
+	}
+	return (i);
 }
-char	*ft_get_line(char *left_str)
+char	*ft_strchr(char *s, int c)
 {
+	int i;
 
+	i = 0;
+	if (!s)
+		return (0);
+	if(c == '\0')
+	{
+		return ((char *)&s[ft_strlen(s)]);
+	while (s[i])
+	{
+		if (s[i] == (char) c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	return (0);
 }
 
-char	*str_join(char *left_str, char *buff)
+char	*ft_strjoin(char *left_str, char *buff)
 {
-	size_t 	i;
-	size_t 	j;
+	size_t	i;
+	size_t	j;
 	char	*str;
 
 	if (!left_str)
@@ -28,6 +53,38 @@ char	*str_join(char *left_str, char *buff)
 	i = -1;
 	j = 0;
 	if (left_str)
-		while (left_str[++i] != '\n')
-		str[i]
+		while (left_str[++i] != '\0') // to reduce line count {25}
+			str[i] = left_str[i];
+	while (buff[j] != '\0')
+		str[i++] = buff[j++];
+	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
+	free(left_str);
+	return (str);
+}
+char	*ft_get_line(char *left_str)
+{
+	int i;
+	char *str;
+
+	i = 0;
+	if (!left_str[i])
+		return (NULL);
+	while (left_str[i]  && left_str[i]!= '\n')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 2));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (left_str[i]  && left_str[i]!= '\n')
+	{
+		str[i] = left_str[i];
+		i++;
+	}
+	if (left_str[i] == '\n')
+	{
+		str[i] = left_str[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
